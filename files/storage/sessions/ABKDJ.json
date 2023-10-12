@@ -1,0 +1,13 @@
+{
+    "information":  {
+        "id":"ABKDJ",
+        "type":"TTT",
+        "name":"test",
+        "players":4
+    },
+    "session": {
+        "player_tokens": {
+            "1":""
+        }
+    }
+}

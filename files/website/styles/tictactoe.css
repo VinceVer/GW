@@ -1,0 +1,112 @@
+:root {
+    --bg-color: rgb(20, 20, 20);
+    --card-color: rgb(23, 23, 23);
+    --tile-size: min(20rem, min(25vh, 25vw));
+    --tile-gap: min(2rem, min(10vh, 10vw));
+}
+
+body {
+    align-items: center;
+    background-color: var(--bg-color);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    width: 100vw;
+}
+
+/*
+@media screen and (orientation: portrait) {
+
+}
+/* Landscape orientation --
+@media screen and (orientation: landscape) {
+
+}*/
+
+#tiles {
+    align-items: center;
+    display: grid;
+    gap: var(--tile-gap);
+    grid-template: repeat(3, var(--tile-size)) / repeat(3, var(--tile-size));
+    height: fit-content;
+    justify-content: center;
+    left: 10vw;
+    top: 10vh;
+    width: fit-content;
+
+    &:hover > .tile::after {opacity: 1;}
+
+    @media screen and (orientation: portrait) {flex-direction: column;}
+    @media screen and (orientation: landscape) {flex-direction: row;}
+}
+
+.tile {
+    align-items: center;
+    aspect-ratio: 1/1;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    position: relative;
+
+    &:hover::before {opacity: 1;}
+
+    &> .tile-content {
+        aspect-ratio: 1/1;
+        background-color: var(--card-color);
+        background-repeat: no-repeat;
+        border-radius: inherit;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        inset: 1px;
+        padding: 10px;
+        position: absolute;
+        width: calc(100% - 22px);
+        z-index: 2;
+    }
+
+    @media screen and (orientation: portrait) {height: 100%; width: auto;}
+    @media screen and (orientation: landscape) {height: auto; width: 100%;}
+}
+
+.tile::before,
+.tile::after {
+    aspect-ratio: 1/1;
+    border-radius: inherit;
+    content: "";
+    display: inline-block;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    transition: opacity 500ms;
+}
+
+.tile::before {
+    background: radial-gradient(
+        50rem circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.06),
+        transparent 40%
+    );
+    z-index: 3;
+}
+
+.tile::after {  
+    background: radial-gradient(
+      60rem circle at var(--mouse-x) var(--mouse-y), 
+      rgba(255, 255, 255, 0.4),
+      transparent 40%
+    );
+    z-index: 1;
+}
